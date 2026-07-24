@@ -6,6 +6,7 @@ class Camera {
         this.height = config.height || 179
 
         this.isOn = false
+        this.isStarting = false
 
         this.stream = null
 
@@ -30,18 +31,26 @@ class Camera {
         if (this.isOn) {
             this.turnOff()
         } else {
-           await this.turnOn()
+            await this.turnOn()
         }
     }
 
     async turnOn() {
-        if (!this.isOn) {
+        if (this.isStarting || this.isOn) return
+
+        this.isStarting = true
+
+        try {
             this.stream = await navigator.mediaDevices.getUserMedia(this.constraints)
 
-            this.element.srcObject  = this.stream
+            this.element.srcObject = this.stream
 
             this.isOn = true;
+
+        } finally {
+            this.isStarting = false
         }
+
     }
 
     turnOff() {
