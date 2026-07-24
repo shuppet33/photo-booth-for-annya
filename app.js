@@ -16,7 +16,7 @@ class App {
         this.camera.init()
 
         this.buttonOn.addEventListener('click', async () => {
-            await this.camera.turnOn()
+            await this.camera.toggleCamera()
         })
 
     }

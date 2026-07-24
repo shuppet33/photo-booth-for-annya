@@ -15,6 +15,14 @@ class Camera {
         }
     }
 
+    toggleCamera() {
+        if (this.isOn) {
+            this.turnOff()
+        } else {
+            this.turnOn()
+        }
+    }
+
     async turnOn() {
 
         if (!this.isOn) {
@@ -23,22 +31,18 @@ class Camera {
             this.element.srcObject  = this.stream
 
             this.isOn = true;
-
-            console.log('LOOOG', 'on', this.stream)
-
-            return;
-        } else {
-            this.turnOff()
         }
-
-
     }
 
     turnOff() {
         if (this.isOn) {
             this.stream.getTracks().forEach(track => {
-                console.log('LOOOG track', track)
+                track.stop()
             })
+
+            this.element.srcObject = null
+            this.stream = null
+            this.isOn = false
         }
     }
 
