@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 0 20px auto;
+}
+
+.container > * {
+    border: 1px solid #222;
+}
+
+h2 {
+    margin-bottom: 20px;
+}

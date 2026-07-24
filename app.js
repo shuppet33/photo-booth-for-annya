@@ -5,7 +5,12 @@ class App {
         this.buttonOn = this.container.querySelector('.buttonOn');
 
         this.camera = null
+
+        this.canvas = this.container.querySelector('.photo');
+        this.buttonTakePhoto = this.container.querySelector('.takePhoto');
     }
+
+
 
     init() {
 
@@ -17,6 +22,10 @@ class App {
 
         this.buttonOn.addEventListener('click', async () => {
             await this.camera.toggleCamera()
+        })
+
+        this.buttonTakePhoto.addEventListener('click', () => {
+            this.camera.takePhoto(this.canvas)
         })
 
     }

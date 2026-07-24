@@ -15,11 +15,22 @@ class Camera {
         }
     }
 
-    toggleCamera() {
+    takePhoto(canvas) {
+        if (!this.isOn) return
+
+        canvas.width = this.element.videoWidth
+        canvas.height = this.element.videoHeight
+
+        const context = canvas.getContext('2d')
+        context.drawImage(this.element, 0, 0, canvas.width, canvas.height)
+
+    }
+
+    async toggleCamera() {
         if (this.isOn) {
             this.turnOff()
         } else {
-            this.turnOn()
+           await this.turnOn()
         }
     }
 
