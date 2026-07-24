@@ -22,6 +22,7 @@ class Countdown {
 
             if (current === 0) {
                 clearInterval(this.interval)
+                this.interval = null
                 this.element.innerText = ''
                 resolve()
                 return
@@ -29,9 +30,5 @@ class Countdown {
 
             this.element.innerText = current
         }, ms))
-    }
-
-    init() {
-
     }
 }

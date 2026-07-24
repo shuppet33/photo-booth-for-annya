@@ -11,8 +11,9 @@ class App {
 
         this.countdownElement = this.container.querySelector('.countdown')
         this.countdown = null
-    }
 
+        this.isFilming = false
+    }
 
 
     init() {
@@ -26,17 +27,24 @@ class App {
             element: this.countdownElement
         })
 
-        this.countdown.init()
-
         this.buttonOn.addEventListener('click', async () => {
             await this.camera.toggleCamera()
         })
 
         this.buttonTakePhoto.addEventListener('click', async () => {
-            if (!this.camera.isOn) return
+            if (this.isFilming || !this.camera.isOn) return
 
-            await this.countdown.start()
-            this.camera.takePhoto(this.canvas)
+            this.isFilming = true
+
+            try {
+                await this.countdown.start()
+                this.camera.takePhoto(this.canvas)
+
+            } finally {
+
+                this.isFilming = false
+
+            }
         })
 
     }
