@@ -35,7 +35,6 @@ class Camera {
     }
 
     async turnOn() {
-
         if (!this.isOn) {
             this.stream = await navigator.mediaDevices.getUserMedia(this.constraints)
 
