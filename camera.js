@@ -17,18 +17,29 @@ class Camera {
 
     async turnOn() {
 
-        this.stream = await navigator.mediaDevices.getUserMedia(this.constraints)
+        if (!this.isOn) {
+            this.stream = await navigator.mediaDevices.getUserMedia(this.constraints)
 
-        this.element.srcObject  = this.stream
-        this.element.play()
+            this.element.srcObject  = this.stream
 
-        this.isOn = true;
+            this.isOn = true;
 
-        console.log('LOOOG', 'on', this.stream)
+            console.log('LOOOG', 'on', this.stream)
 
-        return;
+            return;
+        } else {
+            this.turnOff()
+        }
 
 
+    }
+
+    turnOff() {
+        if (this.isOn) {
+            this.stream.getTracks().forEach(track => {
+                console.log('LOOOG track', track)
+            })
+        }
     }
 
     init() {
